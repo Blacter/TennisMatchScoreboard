@@ -1,5 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+TEMPLATES_PATH: str = '../jinja2/templates'
 
 class Settings(BaseSettings):
     DB_HOST: str
@@ -12,6 +13,8 @@ class Settings(BaseSettings):
     SERVER_HOST: str
     SERVER_PORT: str
     
+    TEMPLATES_PATH: str
+    
     @property
     def DATABASE_URL_pymysql(self) -> str:
         # "mysql+pymysql://user:pass@some_mariadb/dbname?charset=utf8mb4"
@@ -22,6 +25,10 @@ class Settings(BaseSettings):
         return 'sqlite:///test.db'
     
     model_config = SettingsConfigDict(env_file=".env")
+    
+    @property
+    def TEMPLATES_PATH(self) -> str:
+        return self.TEMPLATES_PATH
     
 
 settings = Settings()

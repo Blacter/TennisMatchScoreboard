@@ -1,10 +1,18 @@
-from view import View
-from model import Service
+from abc import ABC, abstractmethod
 
-class Controller:
-    def __init__(self, view: View, service: Service) -> None:
-        self.view: View = view
-        self.service: Service = service
+
+from model.model import Model
+from view.view import View
+
+
+class Controller(ABC):
+    # def __init__(self, view: View, model: Model) -> None:
+    #     self.view: View = view
+    #     self.model: Model = model
+        
+    @abstractmethod
+    def get_response(self) -> tuple[str, str]:
+        pass
         
     
     

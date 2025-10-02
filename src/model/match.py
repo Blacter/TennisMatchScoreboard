@@ -12,7 +12,7 @@ class Match(Base):
     # ? Maybe use relationship ?
     player_1: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'))
     player_2: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'))
-    winner: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'))
+    winner: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'), nullable=True)
     score: Mapped[String] = mapped_column(String(40))
     
     

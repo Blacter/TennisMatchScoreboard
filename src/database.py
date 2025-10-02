@@ -15,6 +15,5 @@ engine = create_engine(
 def create_database() -> None:    
     Base.metadata.create_all(engine)    
         
-print('trace: 0')
 create_database()
     
