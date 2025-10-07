@@ -10,5 +10,5 @@ class PageNotFoundController(Controller):
         self.page_not_found_view: PageNotFoundView = PageNotFoundView()
         
     def get_response(self) -> tuple[str, str]:
-        return ('404 Not Found', self.page_not_found_view.get_page())
+        return ('404 Not Found', self.page_not_found_view.get_page(), self.get_default_response_headers())
     

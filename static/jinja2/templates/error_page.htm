@@ -1,0 +1,11 @@
+{% extends 'base.htm' %}
+{% block title %}Page not found{% endblock title%}
+{% block navigation %}
+<a href="http://localhost:8080/">main_page</a><br/>
+<a href="http://localhost:8080/new-match">new_match_page</a><br/>
+<a href="http://localhost:8080/match-score">match_score_page</a><br/>
+<a href="http://localhost:8080/matches">matches_page</a><br/>
+{% endblock navigation %}
+{% block content %}
+<div style="color: red">{{error_description}}</div>
+{% endblock content %}

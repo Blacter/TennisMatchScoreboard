@@ -9,5 +9,5 @@ class NewMatchController(Controller):
         self.new_match_model: NewMatchModel = NewMatchModel()
         
     def get_response(self) -> tuple[str, str]:
-        return ('200 OK', self.new_match_view.get_page())
+        return ('200 OK', self.new_match_view.get_page(), self.get_default_response_headers())
         

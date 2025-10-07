@@ -6,6 +6,7 @@ from sqlalchemy.orm import sessionmaker
 
 from model.match import Match
 from model.model import Model
+from model.model_exceptions.db_exceptions import DBException
 from model.player import Player
 
 
@@ -34,7 +35,7 @@ class NewMatchCreateModel(Model):
             try: 
                 statement = select(Player).where(Player.name == player_name)
             except:                
-                raise
+                raise DBException()
             else:               
                 player = session.scalars(statement).one()
                 self.player_1: Player = player
@@ -45,7 +46,7 @@ class NewMatchCreateModel(Model):
             try:
                 statement = select(Player).where(Player.name == player_name)
             except:
-                raise
+                raise DBException()
             else:
                 player = session.scalars(statement).one()
                 self.player_2: Player = player
@@ -54,23 +55,30 @@ class NewMatchCreateModel(Model):
         Session = sessionmaker(bind=self.engine)
         with Session() as session:
             try:
-                match_to_add: Match = Match(uuid=str(time()), player_1=self.player_1.id, player_2=self.player_2.id, score='0:0')
+                match_to_add: Match = Match(player_1=self.player_1.id, player_2=self.player_2.id, score='0,0,0:0,0,0')
                 session.add(match_to_add)
             except:
                 session.rollback()
-                raise
+                raise DBException()
             else:
                 session.commit()
+                self.uuid: str = match_to_add.uuid
 
     def is_player_exist(self, player_name: str) -> bool:
         is_exist: bool = False
-        with self.engine.connect() as conn:
-            statement = select(Player).with_only_columns(
-                func.count(Player.name)).where(Player.name == player_name)
-            count_players_with_this_name = conn.scalars(statement).one()
-            print(f'{count_players_with_this_name=}')
-            if count_players_with_this_name == 1:
-                is_exist = True
+        try: 
+            with self.engine.connect() as conn:
+                statement = select(Player).with_only_columns(
+                    func.count(Player.name)).where(Player.name == player_name)                
+                try:                     
+                    count_players_with_this_name = conn.scalars(statement).one()            
+                except DBException:
+                    raise DBException()
+        except:
+            raise DBException()
+            
+        if count_players_with_this_name == 1:
+            is_exist = True
         return is_exist
 
     def create_player(self, player_name: str) -> None:
@@ -81,7 +89,7 @@ class NewMatchCreateModel(Model):
                 session.add(player_to_add)
             except:
                 session.rollback()
-                raise
+                raise DBException()
             else:
                 session.commit()
                 self.player: Player = player_to_add
