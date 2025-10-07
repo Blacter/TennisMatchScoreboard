@@ -8,5 +8,5 @@ class MatchesController(Controller):
         self.matches_view: MatchesView = MatchesView()
         
     def get_response(self) -> tuple[str, str]:
-        return ('200 OK', self.matches_view.get_page())
+        return ('200 OK', self.matches_view.get_page(), self.get_default_response_headers())
     
