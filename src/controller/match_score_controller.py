@@ -31,7 +31,7 @@ class MatchScoreController(Controller):
             return self.response
             
         match_score_service: MatchScoreService = MatchScoreService(self.match.score)            
-        return ('200 OK', self.match_score_view.get_page(self.player_1_name, self.player_2_name, match_score_service.to_dict()), self.get_default_response_headers())
+        return ('200 OK', self.match_score_view.get_page(self.player_1_name, self.player_2_name, match_score_service.to_dict(), self.winner_name), self.get_default_response_headers())
     
     def verify_query_string_parameters(self) -> None:
         try:
@@ -63,6 +63,7 @@ class MatchScoreController(Controller):
         self.get_match()
         self.get_player_1_name()
         self.get_player_2_name()
+        self.get_winner_name()
         print(f'{self.match.score=}')
         print(f'{self.player_1_name=}')
         print(f'{self.player_2_name=}')
@@ -80,8 +81,20 @@ class MatchScoreController(Controller):
         self.match: dict = self.match_score_model.get_match_by_uuid(self.uuid)
         
     def get_player_1_name(self) -> None:
-        self.player_1_name: str = self.match_score_model.get_player_name_by_id(self.match.player_1)
-        
+        self.player_1_name: str = self.match_score_model.get_player_name_by_id(self.match.player_1)        
         
     def get_player_2_name(self) -> None:
         self.player_2_name: str = self.match_score_model.get_player_name_by_id(self.match.player_2)        
+
+    def get_winner_name(self) -> None:
+        print(f'{self.match.winner=}')
+        if self.match.winner is not None:
+            self.winner_id: int|None = self.match.winner
+            self.winner_name: str|None = self.match_score_model.get_player_name_by_id(self.match.winner)
+        else:
+            self.winner_id: int|None = None
+            self.winner_name: str|None = None
+            
+    def was_winner(self) -> bool:
+        return self.winner_name is not None
+    

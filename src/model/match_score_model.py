@@ -36,7 +36,7 @@ class MatchScoreModel(Model):
                 raise DBException()            
         return player.name
     
-    def update_match_score(self, match: Match) -> None:
+    def update_match_state(self, match: Match) -> None:
         Session = sessionmaker(bind=self.engine)
         with Session() as session:
             try:
