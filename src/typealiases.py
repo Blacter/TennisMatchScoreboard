@@ -1,2 +1,5 @@
-type PostBodyDict = dict[str, str] | None
-type ResponseHeaders = list[tuple[str, str]]
+type HtmlPage = str
+type PostRequestBodyDict = dict[str, str] | None
+type ResponseCode = str
+type ResponseBody = str
+type ResponseHeaders = list[tuple[str]]

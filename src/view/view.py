@@ -3,9 +3,8 @@ from abc import ABC, abstractmethod
 from jinja2 import Environment, FileSystemLoader
 
 from config import settings
+from typealiases import HtmlPage
 
-
-type PageView = str
 
 class View(ABC):
     def __init__(self):
@@ -14,6 +13,6 @@ class View(ABC):
         
     
     @abstractmethod
-    def get_page(self, **kwargs) -> PageView:
+    def get_page(self, **kwargs) -> HtmlPage:
         pass
     

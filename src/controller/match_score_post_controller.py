@@ -1,14 +1,15 @@
 from controller.controller_exceptions.request_body_exception import RequestBodyException
 from controller.match_score_controller import MatchScoreController
+from controller.response import Response
 from model.model_exceptions.db_exceptions import DBException
 from service.match_score_service import MatchScoreService
 
 class MatchScorePostController(MatchScoreController):
     def __init__(self, query_string_dict: dict[str, str], post_body: dict[str, str] | None = None):
         super().__init__(query_string_dict)
-        self.post_body:dict[str, str] = post_body
+        self.post_body: dict[str, str] = post_body
         
-    def get_response(self) -> tuple[str, str]:        
+    def get_response(self) -> Response:        
         self.verify_query_string_parameters()        
         if self.response is not None:
             return self.response
@@ -29,20 +30,26 @@ class MatchScorePostController(MatchScoreController):
         
         match_score_service: MatchScoreService = MatchScoreService(self.match.score)
             
-        return ('200 OK', self.match_score_view.get_page(self.player_1_name, self.player_2_name, match_score_service.to_dict(), self.winner_name), self.get_default_response_headers())
+        return Response(code = '200 OK',
+                        body = self.match_score_view.get_page(self.player_1_name, self.player_2_name, match_score_service.to_dict(), self.winner_name),
+                        headers = self.get_default_response_headers())
         
     def verify_match_score_request_body(self) -> None:
         try:
             self.verify_keys()
         except RequestBodyException as e:    
-            self.response = ('400 Bad Request', self.error_page_view.get_page(str(e)), self.get_default_response_headers())                
+            self.response = Response(code = '400 Bad Request',
+                                     body = self.error_page_view.get_page(str(e)),
+                                     headers = self.get_default_response_headers())                
         
     def change_match_state(self) -> None:
         self.renew_match_state_value()
         try:
             self.save_match_state_in_db()
         except DBException as e:
-            self.response = ('500 Internal Server Error', self.error_page_view.get_page(str(e)), self.get_default_response_headers())
+            self.response = Response(code = '500 Internal Server Error',
+                                     body = self.error_page_view.get_page(str(e)), 
+                                     headers = self.get_default_response_headers())
             
     def verify_keys(self) -> None:
         if not self.player_first_win_key_in_body_xor_player_two_win_key_in_body():
