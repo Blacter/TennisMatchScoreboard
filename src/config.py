@@ -15,6 +15,13 @@ class Settings(BaseSettings):
     
     TEMPLATES_PATH: str
     
+    MAIN_PAGE_PATH: str
+    NEW_MATCH_PAGE_PATH: str
+    MATCH_SCORE_PAGE_PATH: str
+    MATCHES_PAGE_PATH: str
+    
+    MATCHES_PER_PAGE: str
+    
     @property
     def DATABASE_URL_pymysql(self) -> str:
         # "mysql+pymysql://user:pass@some_mariadb/dbname?charset=utf8mb4"

@@ -9,10 +9,8 @@ class MatchScoreService:
         self.player_two_sets, self.player_two_games, self.player_two_points = player_two_score.split(',')
         self.player_one_sets = int(self.player_one_sets)
         self.player_one_games = int(self.player_one_games)
-        # self.player_one_points = int(self.player_one_points)
         self.player_two_sets = int(self.player_two_sets)
         self.player_two_games = int(self.player_two_games)
-        # self.player_two_points = int(self.player_two_points)
         
     def reset_score_calculation_state(self) -> None:
         self.is_tie_break = False
@@ -35,9 +33,6 @@ class MatchScoreService:
             
         if self.should_add_set_player_one:
             self.player_one_add_set()
-            
-        # if self.should_add_match_player_one():
-        #     self.player_one_add_match()  
         
     def identify_tie_break(self) -> None:        
         if self.player_one_games == 6 and self.player_two_games == 6:
@@ -53,7 +48,6 @@ class MatchScoreService:
         elif self.player_one_points == '40' and self.player_two_points < '40':
             self.player_one_points = '0'
             self.player_two_points = '0'
-            # self.player_one_win_game()
         elif self.player_one_points == '40' and self.player_two_points == '40':
             self.player_one_points = 'ad'
         elif self.player_one_points == '40' and self.player_two_points == 'ad':
@@ -61,7 +55,6 @@ class MatchScoreService:
         elif self.player_one_points == 'ad':
             self.player_one_points = '0'
             self.player_two_points = '0'
-            # self.player_one_win_game()
             
     def player_one_add_tie_break_point(self) -> None:
         if self.player_one_points < 6:
@@ -96,12 +89,6 @@ class MatchScoreService:
     def should_add_game_player_one(self) -> bool:
         return self.player_one_points == '0' and self.player_two_points == '0'
     
-    # def should_add_match_player_one(self) -> bool:
-    #     if self.player_one_sets == 2:
-    #         print(f'{self.player_one_sets =}')
-    #         return True
-    #     return False
-    
     def increase_player_two_score_on_one_point(self) -> None:
         self.identify_tie_break()
         if not self.is_tie_break:
@@ -115,10 +102,7 @@ class MatchScoreService:
             self.player_two_add_game()
             
         if self.should_add_set_player_two:
-            self.player_two_add_set()
-            
-        # if self.should_add_match_player_two():
-        #     self.player_two_add_match()    
+            self.player_two_add_set()   
         
     def player_two_add_point(self) -> None:
         if self.player_two_points == '0':
@@ -169,11 +153,6 @@ class MatchScoreService:
     
     def should_add_game_player_two(self) -> None:
         return self.player_one_points == '0' and self.player_two_points == '0'
-    
-    # def should_add_match_player_two(self) -> None:
-    #     if self.player_two_sets == 2:
-    #         return True
-    #     return False    
     
     def get_match_score_in_str_format(self) -> str:
         return f'{self.player_one_sets},{self.player_one_games},{self.player_one_points}:{self.player_two_sets},{self.player_two_games},{self.player_two_points}'

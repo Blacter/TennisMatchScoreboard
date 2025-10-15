@@ -1,4 +1,13 @@
 {% extends 'base.htm' %}
+
+{% macro link(current_page_number, link_on_page_number, filter_by_player_name) %}
+{% if current_page_number != link_on_page_number %}
+<a href="http://localhost:8080/matches?page={{link_on_page_number}}&filter_by_player_name={{filter_by_player_name}}">{{link_on_page_number}}</a>
+{% else %}
+{{link_on_page_number}}
+{% endif %}
+{% endmacro %}
+
 {% block title %}Matches{% endblock title%}
 {% block navigation %}
 <a href="http://localhost:8080/">main_page</a><br/>
@@ -8,4 +17,52 @@ matches_page<br/>
 {% endblock navigation %}
 {% block content %}
 Содержимое content matches_page
+<form method="get" enctype="application/x-www-form-urlencoded">
+    <label for="filter_by_player">Поиск по игроку</label><input type="text" id="filter_by_player" name="filter_by_player_name"/>
+    <input type="submit" value="Find"/>
+</form>
+{% if matches %}
+<table>
+    <tr><th>Player 1</th><th>Player 2</th><th>Winner</th></tr>
+    
+    {% for match in matches %}
+    <tr><td>{{match['player_1']}}</td><td>{{match['player_2']}}</td><td>{{match['winner']}}</td></tr>
+    {% endfor %}
+</table>
+{% elif not filter_by_player_name %}
+<p>No matches data found.</p>
+{% else %}
+<p>No matches with player {{filter_by_player_name}} found</p>
+{% endif %}
+
+
+<p>Page number: {{page_number}}</p>
+
+{% if page_number != 1 %}
+<a href="http://localhost:8080/matches?page={{page_number-1}}&filter_by_player_name={{filter_by_player_name}}">prev</a>,
+{% endif %}
+
+{% if page_number == 1 %}
+{{ link(page_number, 1, filter_by_player_name) }}
+{{ link(page_number, 2, filter_by_player_name) }}
+{% elif page_number == 2 %}
+{{ link(page_number, 1, filter_by_player_name) }}
+{{ link(page_number, 2, filter_by_player_name) }}
+{{ link(page_number, 3, filter_by_player_name) }}
+{% elif page_number == 3%}
+{{ link(page_number, 1, filter_by_player_name) }}
+{{ link(page_number, 2, filter_by_player_name) }}
+{{ link(page_number, 3, filter_by_player_name) }}
+{{ link(page_number, 4, filter_by_player_name) }}
+{% else %}
+{{ link(page_number, 1, filter_by_player_name) }}
+{{ link(page_number, 2, filter_by_player_name) }}
+...
+{{ link(page_number, page_number-1, filter_by_player_name) }}
+{{ link(page_number, page_number, filter_by_player_name) }}
+{{ link(page_number, page_number+1, filter_by_player_name) }}
+{% endif %}
+<a href="http://localhost:8080/matches?page={{page_number+1}}&filter_by_player_name={{filter_by_player_name}}">next</a>,
+</br>
+
 {% endblock content %}
