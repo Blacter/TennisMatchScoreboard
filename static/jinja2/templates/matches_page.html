@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+
+{% macro link(current_page_number, link_on_page_number, filter_by_player_name) %}
+{% if current_page_number != link_on_page_number %}
+<a href="http://localhost:8080/matches?page={{link_on_page_number}}&filter_by_player_name={{filter_by_player_name}}">{{link_on_page_number}}</a>
+{% else %}
+<a class="current-page">{{link_on_page_number}}</a>
+{% endif %}
+{% endmacro %}
+
+{% block additional_styles %}<link rel="stylesheet" href="static/jinja2/templates/css/matches.css">{% endblock additional_styles %}
+{% block title %}Matches Page{% endblock title%}
+
+{% block about_container %}
+    <h1 class="welcome-header">Matches</h1>
+    <form method="get" enctype="application/x-www-form-urlencoded" class="matches-filter-form">
+        <input type="text" name="filter_by_player_name" placeholder="Filter by name" class="input-matches-filter">
+        <div><input type="submit" value="Reset Filter" class="btn btn-matches-filter"/></div>
+    </form>
+    <table class="table-matches">
+        <thead>
+            <tr>
+                <th>Player One</th>
+                <th>Player Two</th>
+                <th>Winner</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if matches %}
+                {% for match in matches %}
+                <tr>
+                    <td>{{match['player_1']}}</td>
+                    <td>{{match['player_2']}}</td>
+                    <td>
+                        <span class="winner-name-td">{{match['winner']}}</span>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% elif not filter_by_player_name %}
+            <p>No matches data found.</p>
+            {% else %}
+            <p>No matches with player {{filter_by_player_name}} found</p>
+            {% endif %}
+        </tbody>
+    </table>
+    <nav class="matches-nav">
+        {% if page_number != 1 %}
+        <a class="prev" href="http://localhost:8080/matches?page={{page_number-1}}&filter_by_player_name={{filter_by_player_name}}"> &lt; </a>
+        {% endif %}
+        {% if page_number == 1 %}
+            {{ link(page_number, 1, filter_by_player_name) }}
+            {{ link(page_number, 2, filter_by_player_name) }}
+            {% elif page_number == 2 %}
+            {{ link(page_number, 1, filter_by_player_name) }}
+            {{ link(page_number, 2, filter_by_player_name) }}
+            {{ link(page_number, 3, filter_by_player_name) }}
+            {% elif page_number == 3%}
+            {{ link(page_number, 1, filter_by_player_name) }}
+            {{ link(page_number, 2, filter_by_player_name) }}
+            {{ link(page_number, 3, filter_by_player_name) }}
+            {{ link(page_number, 4, filter_by_player_name) }}
+            {% else %}
+            {{ link(page_number, 1, filter_by_player_name) }}
+            {{ link(page_number, 2, filter_by_player_name) }}
+            ...
+            {{ link(page_number, page_number-1, filter_by_player_name) }}
+            {{ link(page_number, page_number, filter_by_player_name) }}
+            {{ link(page_number, page_number+1, filter_by_player_name) }}
+        {% endif %}
+        <a class="next" href="http://localhost:8080/matches?page={{page_number+1}}&filter_by_player_name={{filter_by_player_name}}"> &gt; </a>
+    </nav>
+{% endblock about_container %}
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>    
+    <link rel="stylesheet" href="static/styles/matches.css">
+    <script src="static/scripts/header_style.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <section class="about-container">
+            
+        </section>
+    </main>
+</body>
+
+</html> -->

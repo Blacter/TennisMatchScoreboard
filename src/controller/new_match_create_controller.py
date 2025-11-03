@@ -33,7 +33,7 @@ class NewMatchCreateController(Controller):
                             headers = self.get_default_response_headers())
         
         return Response(code = '302 Found',
-                        body = self.new_match_create_view.get_page(),
+                        body = '', # body = self.new_match_create_view.get_page(),
                         headers = self.get_redirect_response_headers())
 
     def verify_new_match_create_request_body(self) -> None:

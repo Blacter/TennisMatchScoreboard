@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block additional_styles %}<link rel="stylesheet" href="static/jinja2/templates/css/home-content.css">{% endblock additional_styles %}
+{% block title %}Main Page{% endblock title%}
+
+{% block about_container %}
+    <h1 class="welcome-header">Welcome to Tennis Scoreboard</h1>
+    <p>Manage your tennis matches, record results, and track rankings</p>
+    <div class="home-image">
+    </div>
+    <div class="about-container-nav">
+        <a class="btn-link-container first" href="http://localhost:8080/new-match">
+            <button class="btn adaptive">
+                Start a new match
+            </button>
+        </a>
+        <a class="btn-link-container second" href="http://localhost:8080/matches">
+            <button class="btn adaptive main-page-second">
+                View match results
+            </button>
+        </a>
+    </div>
+{% endblock about_container %}
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>    
+    <link rel="stylesheet" href="static/styles/home-content.css">    
+    <script src="static/scripts/header_style.js" defer></script>    
+</head>
+
+<body>
+    <main>
+        <section class="about-container">
+            
+        </section>
+    </main>
+</body>
+
+</html> -->

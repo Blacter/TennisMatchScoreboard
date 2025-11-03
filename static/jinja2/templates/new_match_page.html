@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block additional_styles %}<link rel="stylesheet" href="static/jinja2/templates/css/new-match.css">{% endblock additional_styles %}
+{% block title %}New Match Page{% endblock title%}
+
+{% block about_container %}
+    <h1 class="welcome-header">New Match Page</h1>
+    <div class="new-match-image">
+    </div>
+    <div class="form-container">
+        <p class="error-msg">
+            {% if is_error %}
+                <div style="color: red">{{error_description}}</div>
+            {% endif %}
+        </p> 
+        <form id="players_form" method="post" action="" >
+            <label class="label-player">Player one</label>
+            <input name="Player_1_name" type="text" placeholder="Name" class="input-name">
+            <label class="label-player">Player two</label>
+            <input name="Player_2_name" type="text" placeholder="Name" class="input-name">
+            <input type="submit" value="Start" class="btn form-button">
+        </form>
+    </div>
+{% endblock about_container %}
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="static/styles/new-match.css">
+    <script src="static/scripts/header_style.js" defer></script>
+    <title>New Match Page</title>
+</head>
+
+<body>
+    <main>        
+        <section class="about-container">
+            
+        </section>
+    </main>
+</body>
+
+</html> -->

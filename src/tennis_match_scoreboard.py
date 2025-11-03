@@ -1,5 +1,6 @@
 from markupsafe import escape
 from pprint import pprint
+from whitenoise import WhiteNoise
 
 from waitress import serve
 
@@ -27,10 +28,17 @@ class TennisMatchScoreboard:
     def __init__(self, host, port) -> None:
         self.host: str = host
         self.port: str = port
+        
+    @staticmethod
+    def __call__(environ, start_response) -> None:
+        TennisMatchScoreboard.simple_app(environ, start_response)
 
     def start_server(self) -> None:
         print(f'Server started at {self.host}:{self.port}')
-        serve(self.simple_app, host=self.host, port=self.port)
+        # tennis_match_scoreboard: TennisMatchScoreboard = TennisMatchScoreboard(settings.SERVER_HOST, settings.SERVER_PORT) # .simple_app
+        application = WhiteNoise(self.simple_app, root=r"C:\Users\slawa\Desktop\Python\00.Pet_Projects\07.TennisMatchScoreboard\TennisMatchScoreboard")
+        # serve(self.simple_app, host=self.host, port=self.port)
+        serve(application, host=self.host, port=self.port)
         
     @staticmethod
     def debug_output():
@@ -63,7 +71,7 @@ class TennisMatchScoreboard:
         elif url_path.is_in_matches_directory() and TennisMatchScoreboard.is_get_request_method(environ):
             matches_controller: MatchesController = MatchesController(query_dict)
             response: Response = matches_controller.get_response()
-        else:            
+        else:
             page_not_found_controller: PageNotFoundController = PageNotFoundController()
             response: Response = page_not_found_controller.get_response()
 

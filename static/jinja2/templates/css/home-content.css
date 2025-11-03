@@ -1,0 +1,14 @@
+.home-image{
+    margin-top: 20px;
+    border-radius: 30px;
+    background-image: url('../images/welcome_image.png');
+    background-position: center;
+    min-height: 50vh;
+    background-size: cover;
+}
+
+.btn.main-page-second {
+    color: black;
+    background-color: #e7e7e7;
+}
+
