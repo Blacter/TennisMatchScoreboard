@@ -14,5 +14,5 @@ class MainPageView(View):
         super().__init__()
 
     def get_page(self) -> HtmlPage:
-        tm = self.env.get_template('main_page.htm')
+        tm = self.env.get_template('main_page.html')
         return tm.render()

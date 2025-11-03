@@ -7,11 +7,13 @@ new_match_page<br/>
 <a href="http://localhost:8080/matches">matches_page</a><br/>
 {% endblock navigation %}
 {% block content %}
-<form method="post" enctype="application/x-www-form-urlencoded">
-    <label for="Player_1">Имя игрока 1:</label><input id="Player_1" name="Player_1_name"/><br/>
-    <label for="Player_2">Имя игрока 2:</label><input id="Player_2" name="Player_2_name"/><br/>
-    <input type="submit" value="Create"/>
+<form id="players_form" method="post" enctype="application/x-www-form-urlencoded">
+    <label id="player_1_label" for="player_1">Имя игрока 1:</label><input id="player_1" name="Player_1_name"/><br/>
+    <label id="player_2_label" for="player_2">Имя игрока 2:</label><input id="player_2" name="Player_2_name"/><br/>
+    <input type="submit" value="CreateJS"/>
+    <button type="button" id="validate_players_inputs">Enter</button>
 </form>
+<div id="js_validation_error"></div>
 {% if is_error %}
     <div style="color: red">{{error_description}}</div>
 {% endif %}

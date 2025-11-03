@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="static/jinja2/templates/css/style.css">
+    <link rel="stylesheet" href="static/jinja2/templates/css/header.css">
+    <link rel="stylesheet" href="static/jinja2/templates/css/main-container-common.css">
+    <link rel="stylesheet" href="static/jinja2/templates/css/footer.css">
+    {% block additional_styles %} {% endblock additional_styles %}
+    <script src="static/jinja2/templates/js/header_style.js" defer></script>
+
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+
+<body>
+    <header class="wide-screen" id="header">
+        <div class="logo" >
+            <div class="drop_menu_button_container">
+                <img class="drop_menu_button" id="drop_menu_button" src="static/jinja2/templates/images/menu.png">
+            </div>
+            <p class="logo-text">TennisScoreboard</p>
+        </div>
+        <nav class="nav-list wide-screen" id="nav_list">            
+            <a href="http://localhost:8080/" class="nav-link">Home</a>
+            <a href="http://localhost:8080/matches" class="nav-link">Matches</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="about-container">
+            {% block about_container %} {% endblock about_container %}            
+        </section>
+    </main>
+
+    <footer>
+        <p class="footer-text">
+            © Tennis Scoreboard, project from 
+            <a href="https://zhukovsd.github.io/java-backend-learning-course/">zhukovsd/java-backend-learning-course</a>
+             roadmap.
+        </p>
+    </footer>
+</body>
+
+</html>

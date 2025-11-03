@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block additional_styles %}<link rel="stylesheet" href="static/jinja2/templates/css/match-score.css">{% endblock additional_styles %}
+{% block title %}Match Score Page{% endblock title%}
+
+{% block about_container %}
+    <h1 class="welcome-header">New Match Page</h1>
+    <div class="match-score-image">
+    </div>
+    <div class="score-table-container">
+        <table class="score-table">
+            <thead class="score-table-header">
+                <tr>
+                    <th>Player</th>
+                    <th>Sets</th>
+                    <th>Games</th>
+                    <th>Points</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="post" enctype="application/x-www-form-urlencoded">
+                    <tr class="score-table-first-player">
+                        <td>{{player_1_name}}</td>
+                        <td>{{score.player_1_sets}}</td>
+                        <td>{{score.player_1_games}}</td>
+                        <td>{{score.player_1_points}}</td>
+                        <td>
+                            <!-- <a href="#"> -->
+                                {% if winner is none %}
+                                    <input type="submit" name="player_first_win" value="score" class="btn table"/>
+                                {% endif %}
+                            <!-- </a> -->
+                        </td>
+                    </tr>
+                    <tr class="score-table-second-player">
+                        <td>{{player_2_name}}</td>
+                        <td>{{score.player_2_sets}}</td>
+                        <td>{{score.player_2_games}}</td>
+                        <td>{{score.player_2_points}}</td>
+                        <td>
+                            <!-- <a href="#"> -->
+                                {% if winner is none %}
+                                    <input type="submit" name="player_second_win" value="score" class="btn table"/>
+                                {% endif %}
+                            <!-- </a> -->
+                        </td>
+                    </tr>
+                </form>
+            </tbody>
+        </table>              
+    </div>
+    {% if winner is not none %}
+        Матч завершён</br>Победитель: {{winner}}</br>
+    {% endif %}  
+{% endblock about_container %}
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="static/styles/match-score.css">    
+    <script src="static/scripts/header_style.js" defer></script>
+</head>
+
+<body>
+    <main>
+        <section class="about-container">
+            
+        </section>
+    </main>
+</body>
+
+</html> -->
