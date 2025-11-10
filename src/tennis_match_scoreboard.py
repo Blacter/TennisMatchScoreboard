@@ -1,6 +1,9 @@
 from markupsafe import escape
+import os
 from pprint import pprint
+import sys
 from whitenoise import WhiteNoise
+
 
 from waitress import serve
 
@@ -28,17 +31,15 @@ class TennisMatchScoreboard:
     def __init__(self, host, port) -> None:
         self.host: str = host
         self.port: str = port
-        
-    @staticmethod
-    def __call__(environ, start_response) -> None:
-        TennisMatchScoreboard.simple_app(environ, start_response)
 
     def start_server(self) -> None:
         print(f'Server started at {self.host}:{self.port}')
-        # tennis_match_scoreboard: TennisMatchScoreboard = TennisMatchScoreboard(settings.SERVER_HOST, settings.SERVER_PORT) # .simple_app
-        application = WhiteNoise(self.simple_app, root=r"C:\Users\slawa\Desktop\Python\00.Pet_Projects\07.TennisMatchScoreboard\TennisMatchScoreboard")
-        # serve(self.simple_app, host=self.host, port=self.port)
+        application = WhiteNoise(self.simple_app, root=self.get_root_directory())
         serve(application, host=self.host, port=self.port)
+        
+    @staticmethod
+    def get_root_directory() -> str:
+        return os.path.split(os.path.dirname(os.path.abspath(sys.argv[0])))[0]
         
     @staticmethod
     def debug_output():
@@ -88,8 +89,8 @@ class TennisMatchScoreboard:
             content_length: int = int(environ['CONTENT_LENGTH'])
             post_body_request_handler = PostRequestBodyHandler(post_body_raw, content_length)
             post_body = post_body_request_handler.to_dict()  
-            print('post_body_dict:')          
-            pprint(post_body)
+            # print('post_body_dict:')          
+            # pprint(post_body)
         return post_body
     
     @staticmethod
@@ -109,10 +110,6 @@ class TennisMatchScoreboard:
         print('* ' * 20)        
         print('WSGI.ERRORS: ')         
         print(f'{environ['wsgi.errors']=}')
-        
-        # if environ['REQUEST_METHOD'] == 'POST':            
-        #     print('WSGI.INPUT: ')
-        #     print(f'{TennisMatchScoreboard.post_body_raw=}')
         print('* ' * 20)
 
         print('post_body:')

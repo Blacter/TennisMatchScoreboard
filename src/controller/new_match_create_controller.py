@@ -8,6 +8,7 @@ from view.new_match_create_view import NewMatchCreateView
 from view.new_match_view import NewMatchView
 from view.error_page_view import ErrorPageView
 
+
 class NewMatchCreateController(Controller):
     def __init__(self, post_body: dict[str, str]):
         super().__init__()
@@ -64,3 +65,4 @@ class NewMatchCreateController(Controller):
         if len(self.new_match_request_body['Player_2_name']) == 0:
             return True
         return False
+    

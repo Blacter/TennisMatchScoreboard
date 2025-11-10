@@ -19,7 +19,7 @@ class MatchScoreModel(Model):
             try: 
                 statement = select(Match).where(Match.uuid == uuid)
                 match: Match = session.scalars(statement).one()
-                print(f'{match=}')
+                # print(f'{match=}')
             except NoResultFound:
                 raise UuidException()
             except DBException:                

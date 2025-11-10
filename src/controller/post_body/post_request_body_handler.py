@@ -7,6 +7,7 @@ from typealiases import PostRequestBodyDict
 from controller.post_body.post_body_error import BodySizeTooLarge
 from controller.query_parser import QueryParser
 
+
 class PostRequestBodyHandler:
     def __init__(self, post_request_body: bytes, post_request_body_length: int):
         if post_request_body_length > 1000 or len(post_request_body) > 1000:
@@ -21,7 +22,6 @@ class PostRequestBodyHandler:
         self.query = self.query.strip()
         self.query = self.query[0:256]
         self.query = urllib.parse.unquote(self.query)
-        # self.query = escape(self.query)
 
     def to_dict(self) -> dict[str, str]:
         return copy(self._query_dict)

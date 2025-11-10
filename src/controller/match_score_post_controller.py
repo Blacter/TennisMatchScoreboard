@@ -4,6 +4,7 @@ from controller.response import Response
 from model.model_exceptions.db_exceptions import DBException
 from service.match_score_service import MatchScoreService
 
+
 class MatchScorePostController(MatchScoreController):
     def __init__(self, query_string_dict: dict[str, str], post_body: dict[str, str] | None = None):
         super().__init__(query_string_dict)

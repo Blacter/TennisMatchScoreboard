@@ -11,7 +11,6 @@ class Match(Base):
     
     id: Mapped[Integer] = mapped_column(Integer, primary_key=True)
     uuid: Mapped[String] = mapped_column(String(36), nullable=False, unique=True, default=uuid.uuid4)
-    # ? Maybe use relationship ?
     player_1: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'))
     player_2: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'))
     winner: Mapped[Integer] = mapped_column(Integer, ForeignKey('players.id'), nullable=True)

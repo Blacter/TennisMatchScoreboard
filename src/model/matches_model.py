@@ -10,8 +10,6 @@ from model.player import Player
 from model.model_exceptions.db_exceptions import DBException
 
 
-
-
 class MatchesModel(Model):
     def __init__(self):
         super().__init__()
@@ -61,8 +59,6 @@ class MatchesModel(Model):
                 matches_to_print: list[str] = []
                 for match in self.matches_with_player_ids:
                     matches_to_print.append(str(match))
-                # for match_to_print in matches_to_print:
-                #     print(f'{match_to_print=}')
             except NoResultFound:
                 raise NoResultFound()
             except DBException:                
