@@ -12,6 +12,7 @@ from service.match_score_service import MatchScoreService
 from view.error_page_view import ErrorPageView
 from view.match_score_view import MatchScoreView
 
+
 class MatchScoreController(Controller):
     def __init__(self, query_string_dict: dict[str, str]):
         super().__init__()
@@ -78,9 +79,9 @@ class MatchScoreController(Controller):
         self.get_player_1_name()
         self.get_player_2_name()
         self.get_winner_name()
-        print(f'{self.match.score=}')
-        print(f'{self.player_1_name=}')
-        print(f'{self.player_2_name=}')
+        # print(f'{self.match.score=}')
+        # print(f'{self.player_1_name=}')
+        # print(f'{self.player_2_name=}')
     
     def verify_uuid_key_exists(self) -> None:
         if 'uuid' not in self.query_string_dict.keys():
@@ -101,7 +102,7 @@ class MatchScoreController(Controller):
         self.player_2_name: str = self.match_score_model.get_player_name_by_id(self.match.player_2)        
 
     def get_winner_name(self) -> None:
-        print(f'{self.match.winner=}')
+        # print(f'{self.match.winner=}')
         if self.match.winner is not None:
             self.winner_id: int|None = self.match.winner
             self.winner_name: str|None = self.match_score_model.get_player_name_by_id(self.match.winner)

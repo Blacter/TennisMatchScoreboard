@@ -1,7 +1,6 @@
 import re
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.exc import NoResultFound
-# from pymysql.err import OperationalError
 from typing import Sequence
 
 from controller.controller import Controller
@@ -49,7 +48,7 @@ class MatchesController(Controller):
                 self.matches: Sequence[Match] = self.matches_model.get_matches_with_player_names(self.query['page'])
             else:
                 self.matches: Sequence[Match] = self.matches_model.get_matches_with_player_names_with_filter(self.query['page'], self.query['filter_by_player_name'])
-            print(f'{self.matches=}')
+            # print(f'{self.matches=}')
         except NoResultFound:
             self.response = Response(code = '200 OK',
                         body = self.matches_view.get_page(page_number=self.query['page'], filter_by_player_name=self.query['filter_by_player_name'], matches = None), 

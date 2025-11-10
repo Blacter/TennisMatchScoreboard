@@ -16,5 +16,5 @@ def create_database() -> None:
     Base.metadata.drop_all(engine)    
     Base.metadata.create_all(engine)    
         
-create_database()
-    
+if __name__ == '__main__':
+    create_database()    

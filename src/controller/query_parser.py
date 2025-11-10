@@ -28,4 +28,3 @@ class QueryParser:
 
     def to_dict(self) -> dict[str, str]:
         return self.parsed_query
-        

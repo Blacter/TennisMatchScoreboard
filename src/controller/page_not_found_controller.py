@@ -4,7 +4,6 @@ from model.page_not_found_model import PageNotFoundModel
 from view.page_not_found_view import PageNotFoundView
 
 
-
 class PageNotFoundController(Controller):
     def __init__(self):
         super().__init__()
