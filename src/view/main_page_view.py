@@ -15,4 +15,4 @@ class MainPageView(View):
 
     def get_page(self) -> HtmlPage:
         tm = self.env.get_template('main_page.html')
-        return tm.render()
+        return tm.render(static_files_path=self.static_files_path)

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block additional_styles %}<link rel="stylesheet" href="static/jinja2/templates/css/home-content.css">{% endblock additional_styles %}
+{% block additional_styles %}<link rel="stylesheet" href="{{static_files_path}}/css/home-content.css">{% endblock additional_styles %}
 {% block title %}Main Page{% endblock title%}
 
 {% block about_container %}
@@ -21,21 +21,3 @@
         </a>
     </div>
 {% endblock about_container %}
-<!-- 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>    
-    <link rel="stylesheet" href="static/styles/home-content.css">    
-    <script src="static/scripts/header_style.js" defer></script>    
-</head>
-
-<body>
-    <main>
-        <section class="about-container">
-            
-        </section>
-    </main>
-</body>
-
-</html> -->

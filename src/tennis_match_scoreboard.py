@@ -27,6 +27,7 @@ from typealiases import ResponseHeaders
 from view.main_page_view import MainPageView
 from view.new_match_view import NewMatchView
 
+
 class TennisMatchScoreboard:
     def __init__(self, host, port) -> None:
         self.host: str = host

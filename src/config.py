@@ -1,6 +1,6 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-TEMPLATES_PATH: str = '../jinja2/templates'
+# TEMPLATES_PATH: str = '../jinja2/templates'
 
 class Settings(BaseSettings):
     DB_HOST: str
@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     SERVER_PORT: str
     
     TEMPLATES_PATH: str
+    STATIC_FILES_PATH: str
     
     MAIN_PAGE_PATH: str
     NEW_MATCH_PAGE_PATH: str
