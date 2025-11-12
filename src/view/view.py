@@ -8,9 +8,9 @@ from typealiases import HtmlPage
 
 class View(ABC):
     def __init__(self):
-        file_loader = FileSystemLoader(settings.TEMPLATES_PATH)
+        file_loader = FileSystemLoader(settings.TEMPLATES_PATH) # '../jinja2/templates'
         self.env = Environment(loader=file_loader)
-        
+        self.static_files_path: str = settings.STATIC_FILES_PATH
     
     @abstractmethod
     def get_page(self, **kwargs) -> HtmlPage:
