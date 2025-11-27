@@ -110,7 +110,7 @@ class TennisMatchScoreboard:
         pprint(environ)
         print('* ' * 20)        
         print('WSGI.ERRORS: ')         
-        print(f'{environ['wsgi.errors']=}')
+        print(f'{environ["wsgi.errors"]=}')
         print('* ' * 20)
 
         print('post_body:')
